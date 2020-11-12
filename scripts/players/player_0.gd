@@ -25,19 +25,18 @@ func _ready():
 
 func _process(_delta):
 	if health<=0 :
+		Global.game_over = true
 		queue_free()
 	
 
 func _on_player_0_area_entered(area):
 	if area.is_in_group("enemy"):
 		health -= Global.player_damage
+	
+	else:
+		pass
 		
 	Global.player_health = health
+	Global.player_damage = 0
 	
-
-
-
-
-
-
 

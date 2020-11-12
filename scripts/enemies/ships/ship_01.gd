@@ -58,9 +58,10 @@ func _on_ship_01_area_entered(area):
 		pass
 	elif area.is_in_group("fire"):
 		health -= damage
-	else:
+	elif area.is_in_group("player"):
 		Global.player_damage = 5
-	
+	else:
+		pass
 
 func _on_distroy_sound_finished():
 	

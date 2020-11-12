@@ -19,6 +19,7 @@ onready var clasic_play_button = $MarginContainer/VBoxContainer/VBoxContainer2/H
 onready var story_play_button = $MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/story
 
 var player_instance
+var scene_instance
 
 onready var particles_BG = $CPUParticles2D.process_material as ParticlesMaterial
 
@@ -40,20 +41,21 @@ func _process(_delta):
 	
 	score.text = str(Global.score)
 	
+	if Global.game_over:
+		$player_fire_timer.stop()
+		Global.game_over=false
+		_show_stuff()
+		scene_instance.queue_free()
+	
 
 func _add_fire():
 	var open_fire = fires_scn.instance()._select_fire(Global.fire_type).duplicate()
-	open_fire.position = Vector2 ( player_instance.global_position.x , player_instance.global_position.y + (-Global.screen_ratio_y*60) )
+	open_fire.position = Vector2 ( player_instance.global_position.x , player_instance.global_position.y + (-Global.screen_ratio_y*80) )
 	add_child(open_fire)
 
 
 func _on_clasic_pressed():
-	Global.clasic_mode = 1	
-	_hide_stuff()
-	var scene_instance = levels_scn.instance()
-	scene_instance._select_level(Global.level)
-	add_child(scene_instance)
-	_add_player()
+	_start_game()
 	
 
 func _hide_stuff():
@@ -64,6 +66,14 @@ func _hide_stuff():
 	story_play_button.hide()
 	
 
+func _show_stuff():
+	$TextureRect2.show()
+	clasic_high_score.show()
+	story_high_score.show()
+	clasic_play_button.show()
+	story_play_button.show()
+	
+
 func _add_player():
 	player_instance = players_scn.instance()._select_player(Global.player).duplicate()
 	add_child(player_instance)
@@ -72,4 +82,15 @@ func _add_player():
 
 func _on_player_fire_timer_timeout():
 	_add_fire()
+	
+
+func _start_game():
+	Global.player_health=40
+	Global.game_over = false
+	Global.clasic_mode = 1
+	_hide_stuff()
+	scene_instance = levels_scn.instance()
+	scene_instance._select_level(Global.level)
+	add_child(scene_instance)
+	_add_player()
 	

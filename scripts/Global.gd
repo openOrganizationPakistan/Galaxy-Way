@@ -1,5 +1,7 @@
 extends Node
 
+var game_over = false
+
 var clasic_mode = 0
 
 var level = 0

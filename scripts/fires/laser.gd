@@ -23,6 +23,7 @@ func _process(_delta):
 
 func _on_laser_area_entered(_area):
 	Global.fire_damage = 100
+	$shape.set_deferred("disabled",true)
 	
 
 func _on_laser_beam_finished():
