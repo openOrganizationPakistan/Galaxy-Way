@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/levels/level_1.gd" type="Script" id=1]
 [ext_resource path="res://scenes/enemies.tscn" type="PackedScene" id=2]
-
+[ext_resource path="res://scenes/enemies/enemy_fire.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -12,6 +12,7 @@ _data = {
 [node name="level_1" type="Node"]
 script = ExtResource( 1 )
 enemy_scn = ExtResource( 2 )
+enemy_fire_scn = ExtResource( 3 )
 
 [node name="mines_timer" type="Timer" parent="."]
 wait_time = 7.0
@@ -31,6 +32,10 @@ rotation = -0.0016025
 [node name="spawn_ship" type="Timer" parent="."]
 wait_time = 1.25
 one_shot = true
+
+[node name="ship_01_fire" type="Timer" parent="."]
+autostart = true
 [connection signal="timeout" from="mines_timer" to="." method="_mine_enemy"]
 [connection signal="timeout" from="rock_spawn" to="." method="_rock_enemy"]
 [connection signal="timeout" from="spawn_ship" to="." method="_spawn_ship"]
+[connection signal="timeout" from="ship_01_fire" to="." method="_on_ship_01_fire_timeout"]

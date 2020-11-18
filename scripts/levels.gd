@@ -1,6 +1,9 @@
 extends Node
 
-
+var instance
 
 func _select_level(index):
-	return get_child(index).duplicate()
+	
+	instance = get_child(index).duplicate()
+	return instance
+	

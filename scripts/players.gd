@@ -1,5 +1,8 @@
 extends Node2D
 
+var instance
+
 func _select_player(index):
-	return get_child(index).duplicate()
+	instance = get_child(index).duplicate()
+	return instance
 

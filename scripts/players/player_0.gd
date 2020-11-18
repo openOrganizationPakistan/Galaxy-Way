@@ -1,8 +1,9 @@
 extends Area2D
 
 var health = Global.player_health
+var damage = 5
 
-export var movement_weight = 0.5
+export var movement_weight = 0.2
 
 var touch
 
@@ -20,7 +21,7 @@ func _input(event):
 	
 
 func _ready():
-	scale = Vector2(1,1) * Global.screen_ratio_x
+	scale = Vector2( 0.75 , 0.75 ) * Global.screen_ratio_y
 	
 
 func _process(_delta):
@@ -31,12 +32,6 @@ func _process(_delta):
 
 func _on_player_0_area_entered(area):
 	if area.is_in_group("enemy"):
-		health -= Global.player_damage
-	
-	else:
-		pass
-		
-	Global.player_health = health
-	Global.player_damage = 0
+		health -= damage
 	
 

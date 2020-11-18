@@ -1,6 +1,10 @@
+#Global script inherited in every script
+
 extends Node
 
 var game_over = false
+
+var play_counts = 0
 
 var clasic_mode = 0
 
@@ -14,8 +18,8 @@ var player_fire_speed = 1
 var rock_01_speed = 3
 var mine_01_speed = 2
 
-var ship_01_speed = 4
-var ship_01_health = 20
+var ship_01_speed = 2
+var ship_01_health = 100
 
 var fire_type = 0
 
@@ -32,5 +36,4 @@ onready var screen_ratio_x = screen_size.x / 480
 onready var screen_ratio_y = screen_size.y / 720
 onready var screen_ratio_avg = ( screen_ratio_x + screen_ratio_y ) / 2
 
-func _ready():
-	pass # Replace with function body.
+
